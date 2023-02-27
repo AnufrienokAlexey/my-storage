@@ -1,5 +1,5 @@
 <?php
-require 'includes/connect.php';
+session_start();
 ?>
 
 <!doctype html>
@@ -18,6 +18,7 @@ require 'includes/connect.php';
 <body>
 	<main class="sign-in flex">
 		<form action="lk.php" method="post" class="form-control form_sign-in">
+            <h3>Авторизация</h3>
 			<div class="mb-3">
 				<label for="login" class="form-label">Логин</label>
 				<input class="form-control" type="text" name="login" id="login" placeholder="Введите свой логин" required>
@@ -26,8 +27,17 @@ require 'includes/connect.php';
 				<label for="password" class="form-label">Пароль</label>
 				<input class="form-control" type="password" name="password" id="password" placeholder="Введите свой пароль" required>
 			</div>
-			<button class="btn btn-primary" type="submit">Авторизоваться</button>
+            <div class="flex sign-in_bottom">
+                <button class="btn btn-primary" type="submit">Авторизоваться</button>
+                <a href="register.php">Зарегистрироваться</a>
+            </div>
 		</form>
+        <?php
+            if (isset($_SESSION['success_register'])) {
+                echo '<p class="sign-in_title">' . $_SESSION['success_register'] . '</p>';
+                unset($_SESSION['success_register']);
+             }
+        ?>
 	</main>
 </body>
 </html>

@@ -1,5 +1,15 @@
 <?php
+session_start();
 require 'includes/connect.php';
+try {
+	$connect = new PDO("mysql:host=localhost;dbname=my-storage;charset=utf8", "root", "");
+	$folders = $connect->query('SELECT * FROM `users`')->fetchAll(PDO::FETCH_ASSOC);
+//	var_dump($folders);
+}
+catch(PDOException $e)
+{
+	echo "Неудачная попытка подключения к базе данных: " . $e->getMessage();
+}
 ?>
 
 <!doctype html>

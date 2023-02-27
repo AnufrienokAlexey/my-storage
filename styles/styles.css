@@ -90,7 +90,7 @@ a {
     height: 40px;
     background-color: #1890FF;
     border: 1px solid #1890FF;
-    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.043);
     border-radius: 4px;
     color: white;
 }
@@ -117,14 +117,26 @@ a {
     font-weight: 700;
 }
 
-.sign-in{
+.sign-in, .sign-up{
+    flex-direction: column;
     height: 100vh;
     align-items: center;
     justify-content: center;
 }
 
 .form_sign-in {
-
     width: 500px;
+}
 
+.sign-in_bottom {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sign-in_title {
+    color: green;
+}
+
+.password_not_match {
+    color: darkred;
 }
