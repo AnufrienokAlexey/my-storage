@@ -5,7 +5,8 @@
     --orange: #FFD600;
     --dark-orange: #E1670E;
     --light-grey: #CACACA;
-    --body: #E5E5E5;
+    --body: black;
+    /*--body: #E5E5E5;*/
 }
 * {box-sizing: border-box}
 

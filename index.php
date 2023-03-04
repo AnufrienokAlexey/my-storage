@@ -2,7 +2,7 @@
 session_start();
 ?>
 
-<!doctype html>
+<!doctype html>exirt
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
