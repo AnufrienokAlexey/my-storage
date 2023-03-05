@@ -1,3 +1,8 @@
+<?php
+session_start();
+var_dump($_SESSION['user']);
+?>
+
 <!doctype html>
 <html lang="ru">
 <head>
@@ -49,8 +54,8 @@
         </main>
         <aside class="right-container flex">
             <h2>Мой профиль</h2>
-            <h4>Привет, пользователь!</h4>
-            <button class="create-drive">Выйти</button>
+            <h4>Привет, <?=$_SESSION['user'][0]['full_name'];?>!</h4>
+            <a href="../includes/logout.php">Выйти</a>
         </aside>
     </div>
 </body>

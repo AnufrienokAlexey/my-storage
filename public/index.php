@@ -1,10 +1,16 @@
 <?php
+
 session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
-new Connect();
-?>
 
+new Connect();
+
+if (isset($_SESSION['user'])) {
+	header('Location: views/lk.php');
+}
+
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -19,28 +25,28 @@ new Connect();
 	<title>Мое хранилище - Авторизация</title>
 </head>
 <body>
-	<main class="sign-in flex">
-		<form action="includes/sign-in.php" method="post" class="form-control form_sign-in">
-            <h3>Авторизация</h3>
-			<div class="mb-3">
-				<label for="login" class="form-label">Логин</label>
-				<input class="form-control" type="text" name="login" id="login" placeholder="Введите свой логин" required>
-			</div>
-			<div class="mb-3">
-				<label for="password" class="form-label">Пароль</label>
-				<input class="form-control" type="password" name="password" id="password" placeholder="Введите свой пароль" required>
-			</div>
-            <div class="flex sign-in_bottom">
-                <button class="btn btn-primary" type="submit">Авторизоваться</button>
-                <a href="views/register.php">Зарегистрироваться</a>
-            </div>
-		</form>
-        <?php
-            if (isset($_SESSION['success_register'])) {
-                echo '<p class="sign-in_title">' . $_SESSION['success_register'] . '</p>';
-                unset($_SESSION['success_register']);
-             }
-        ?>
-	</main>
+<main class="sign-in flex">
+	<form action="includes/sign-in.php" method="post" class="form-control form_sign-in">
+		<h3>Авторизация</h3>
+		<div class="mb-3">
+			<label for="login" class="form-label">Логин</label>
+			<input class="form-control" type="text" name="login" id="login" placeholder="Введите свой логин" required>
+		</div>
+		<div class="mb-3">
+			<label for="password" class="form-label">Пароль</label>
+			<input class="form-control" type="password" name="password" id="password" placeholder="Введите свой пароль" required>
+		</div>
+		<div class="flex sign-in_bottom">
+			<button class="btn btn-primary" type="submit">Авторизоваться</button>
+			<a href="views/register.php">Зарегистрироваться</a>
+		</div>
+	</form>
+	<?php
+	if (isset($_SESSION['success_register'])) {
+		echo '<p class="sign-in_title">' . $_SESSION['success_register'] . '</p>';
+		unset($_SESSION['success_register']);
+	}
+	?>
+</main>
 </body>
 </html>
