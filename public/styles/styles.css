@@ -5,7 +5,7 @@
     --orange: #FFD600;
     --dark-orange: #E1670E;
     --light-grey: #CACACA;
-    --body: black;
+    --body: rgba(148, 112, 148, 0.85);
     /*--body: #E5E5E5;*/
 }
 * {box-sizing: border-box}

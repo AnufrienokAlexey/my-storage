@@ -1,9 +1,11 @@
 <?php
 session_start();
+
+require __DIR__ . '/../vendor/autoload.php';
+new Connect();
 ?>
 
-
-<!doctype html>exirt
+<!doctype html>
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
@@ -18,7 +20,7 @@ session_start();
 </head>
 <body>
 	<main class="sign-in flex">
-		<form action="lk.php" method="post" class="form-control form_sign-in">
+		<form action="includes/sign-in.php" method="post" class="form-control form_sign-in">
             <h3>Авторизация</h3>
 			<div class="mb-3">
 				<label for="login" class="form-label">Логин</label>
@@ -30,7 +32,7 @@ session_start();
 			</div>
             <div class="flex sign-in_bottom">
                 <button class="btn btn-primary" type="submit">Авторизоваться</button>
-                <a href="register.php">Зарегистрироваться</a>
+                <a href="views/register.php">Зарегистрироваться</a>
             </div>
 		</form>
         <?php
