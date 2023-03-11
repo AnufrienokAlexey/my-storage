@@ -1,6 +1,8 @@
 <?php
 session_start();
-var_dump($_SESSION['user']);
+//var_dump($_SESSION['user']);
+//var_dump($_SESSION['user_folders']);
+//require __DIR__ . '/../includes/all-folders.php';
 ?>
 
 <!doctype html>
@@ -27,29 +29,48 @@ var_dump($_SESSION['user']);
         <main class="center-container flex">
             <div class="center-header flex">
                 <h1 class="center-title reset">Мой диск</h1>
-                <button class="create-drive">Создать папку</button>
+<!--                <button class="create-drive">Создать папку</button>-->
+                <a href="../includes/add-folder.php" class="create-drive">Создать папку</a>
             </div>
             <div class="folders">
-                <div class="folder flex">
-                    <img src="../images/folder.svg" alt="Папка" class="folder-image">
-                    <h4 class="folder-title">Папка</h4>
-                </div>
-                <div class="folder flex">
-                    <img src="../images/folder.svg" alt="Папка" class="folder-image">
-                    <h4 class="folder-title">Папка</h4>
-                </div>
-                <div class="folder flex">
-                    <img src="../images/folder.svg" alt="Папка" class="folder-image">
-                    <h4 class="folder-title">Папка</h4>
-                </div>
-                <div class="folder flex">
-                    <img src="../images/folder.svg" alt="Папка" class="folder-image">
-                    <h4 class="folder-title">Папка</h4>
-                </div>
-                <div class="folder flex">
-                    <img src="../images/folder.svg" alt="Папка" class="folder-image">
-                    <h4 class="folder-title">Папка</h4>
-                </div>
+                <?php
+                if (isset($_SESSION['user_folders'])) {
+                    foreach ($_SESSION['user_folders'] as $user_folder) { ?>
+                        <div class="folder flex">
+                            <img src="../images/folder.svg" alt="Папка" class="folder-image">
+                            <h4 class="folder-title"><?=$user_folder['folder_name'];?></h4>
+                            <form action="../includes/delete-folder.php" method="post">
+                                <input type="hidden" name="id" value="<?=$user_folder['id'];?>">
+                                <input type="submit" value="Удалить папку">
+                            </form>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Launch static backdrop modal
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Understood</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+<!--                            <a href="../includes/delete-folder.php">Удалить папку</a>-->
+                        </div>
+                    <?php }
+                } ?>
             </div>
         </main>
         <aside class="right-container flex">

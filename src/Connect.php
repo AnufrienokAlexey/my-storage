@@ -1,14 +1,15 @@
 <?php
 
-class Connect {
+class
+Connect {
 
 	public function __construct()
 	{
 		$this->createNewDatabase();
 	}
 
-	public function createNewDatabase()
-	{
+	public function createNewDatabase(): void
+    {
 		try {
 			$connect = new PDO("mysql:host=localhost", "root", "");
 			$databases = $connect->query('show databases')->fetchAll(PDO::FETCH_COLUMN);
@@ -22,9 +23,7 @@ class Connect {
 				echo 'База данных my-storage успешно создана!';
 			}
 		}
-
-		catch(PDOException $e)
-		{
+		catch(PDOException $e) {
 			echo "Неудачная попытка подключения к базе данных: " . $e->getMessage();
 		}
 	}

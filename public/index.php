@@ -6,7 +6,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 new Connect();
 
-if (isset($_SESSION['user'])) {
+if (!empty($_SESSION['user'])) {
 	header('Location: views/lk.php');
 }
 

@@ -2,12 +2,11 @@
 
 class User {
 
-	public function selectUserFromDatabase($login, $password)
-	{
+	public function selectUserFromDatabase($login, $password): false|array
+    {
 		$arr = [];
 		try {
 			$connect = new PDO("mysql:host=localhost;dbname=my-storage;charset=utf8", "root", "");
-			$password = md5($password);
 			$users = $connect->prepare("SELECT * FROM `users` WHERE `login` = '$login' AND `password` = '$password'");
 			$users->execute();
 			$arr = $users->fetchAll(PDO::FETCH_ASSOC);
@@ -18,11 +17,10 @@ class User {
 		return $arr;
 	}
 
-	public function addNewUserToDatabase($login, $email, $password, $fullName)
-	{
+	public function addNewUserToDatabase($login, $email, $password, $fullName): void
+    {
 		try {
 			$connect = new PDO("mysql:host=localhost;dbname=my-storage;charset=utf8", "root", "");
-			$password = md5($password);
 			$users = $connect->prepare("INSERT INTO `users`(`id`, `login`, `email`, `password`, `full_name`) VALUES (null,'$login','$email','$password','$fullName')");
 			$users->execute();
 		}
@@ -31,8 +29,8 @@ class User {
 		}
 	}
 
-	public function createNewUserDisk($folderName)
-	{
+	public function createNewUserDisk($folderName): void
+    {
 		try{
 			$connect = new PDO("mysql:host=localhost;dbname=my-storage;charset=utf8", "root", "");
 			$databases = $connect->query('show tables')->fetchAll(PDO::FETCH_COLUMN);
@@ -41,7 +39,6 @@ class User {
 				$connect->exec("CREATE TABLE `$folderName` (id integer auto_increment primary key, folder_name varchar(30));");
 			}
 		}
-
 		catch(PDOException $e) {
 			echo "Неудачная попытка подключения к базе данных: " . $e->getMessage();
 		}
