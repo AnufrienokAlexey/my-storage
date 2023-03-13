@@ -36,7 +36,7 @@ class User {
 			$databases = $connect->query('show tables')->fetchAll(PDO::FETCH_COLUMN);
 
 			if(!in_array($folderName, $databases)) {
-				$connect->exec("CREATE TABLE `$folderName` (id integer auto_increment primary key, folder_name varchar(30));");
+				$connect->exec("CREATE TABLE `$folderName` (id integer auto_increment primary key, folder_name varchar(30), file_path varchar(100))");
 			}
 		}
 		catch(PDOException $e) {

@@ -1,7 +1,9 @@
 <?php
 session_start();
 //var_dump($_SESSION['user']);
-//var_dump($_SESSION['user_folders']);
+var_dump($_SESSION['user_folders']);
+var_dump($_SESSION['folder_path']);
+//unset($_SESSION['user_folders']);
 //require __DIR__ . '/../includes/all-folders.php';
 ?>
 
@@ -29,44 +31,57 @@ session_start();
         <main class="center-container flex">
             <div class="center-header flex">
                 <h1 class="center-title reset">Мой диск</h1>
-<!--                <button class="create-drive">Создать папку</button>-->
-                <a href="../includes/add-folder.php" class="create-drive">Создать папку</a>
+
+                <form action="../includes/save-file.php" enctype="multipart/form-data" method="post">
+                    <div class="mb-3">
+<!--                        <label for="formFileMultiple" class="form-label">Загрузить файл</label>-->
+                        <input class="form-control" type="file" name="fileToUpload" id="formFileMultiple" multiple>
+                        <input type="submit" value="Отправить" name="downloaded_file">
+                    </div>
+                </form>
+
+                <form action="../includes/add-folder.php" method="post">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Создать папку
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Введите название папки</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" name="new_folder_name">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                    <button type="submit" class="btn btn-primary">Создать папку</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="folders">
                 <?php
+
                 if (isset($_SESSION['user_folders'])) {
                     foreach ($_SESSION['user_folders'] as $user_folder) { ?>
                         <div class="folder flex">
-                            <img src="../images/folder.svg" alt="Папка" class="folder-image">
+<!--                            <img src="../images/folder.svg" alt="Папка" class="folder-image">-->
+                            <form action="../includes/go-to-folder.php" method="post">
+                                <input type="image" src="../images/folder.svg">
+                                <input type="hidden" name="id" value="<?=$user_folder['id'];?>">
+                            </form>
                             <h4 class="folder-title"><?=$user_folder['folder_name'];?></h4>
                             <form action="../includes/delete-folder.php" method="post">
                                 <input type="hidden" name="id" value="<?=$user_folder['id'];?>">
                                 <input type="submit" value="Удалить папку">
                             </form>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                Launch static backdrop modal
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Understood</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
 <!--                            <a href="../includes/delete-folder.php">Удалить папку</a>-->
                         </div>
                     <?php }
@@ -79,5 +94,6 @@ session_start();
             <a href="../includes/logout.php">Выйти</a>
         </aside>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
