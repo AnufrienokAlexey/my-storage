@@ -24,16 +24,13 @@ class Folder {
         $filePath = 'uploads/' . $login . '/' . $folderName;
         $newFolder = $connect->prepare("INSERT INTO $login (`id`, `folder_name`, `file_path`) VALUES (null, '$folderName', '$filePath')");
         $newFolder->execute();
-        return $newFolder;
     }
 
-    public function selectCurrentFolder($login, $id)
+    public function selectCurrentFolder($login, $id): false|array
     {
         $connect = new PDO("mysql:host=localhost;dbname=my-storage;charset=utf8", "root", "");
         $login = 'folders_' . $login;
         $currentFolder = $connect->prepare("SELECT * FROM $login WHERE `id` = $id");
-        $result = $currentFolder->execute();
-//        var_dump($result);
         return $currentFolder->fetchAll(PDO::FETCH_ASSOC);
     }
 

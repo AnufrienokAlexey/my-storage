@@ -1,30 +1,35 @@
 <?php
 
-class
-Connect {
+class Connect extends Db {
 
-	public function __construct()
-	{
-		$this->createNewDatabase();
-	}
+    use HasConnect;
 
-	public function createNewDatabase(): void
+    public function createNewDatabase(): void
     {
+        $dbname = parent::getDbname();
 		try {
-			$connect = new PDO("mysql:host=localhost", "root", "");
-			$databases = $connect->query('show databases')->fetchAll(PDO::FETCH_COLUMN);
-
-			if(!in_array('my-storage',$databases)) {
-				$connect->exec("
-					CREATE DATABASE `my-storage`;
-					use `my-storage`;
+            $databases = $this->getAllDatabases()->query('show databases')->fetchAll(PDO::FETCH_COLUMN);
+			if (!in_array($dbname, $databases)) {
+                $this->getAllDatabases()->exec("
+					CREATE DATABASE $dbname;
+					use $dbname;
 					CREATE TABLE `users` (id integer auto_increment primary key, login varchar(30), email varchar(100), password varchar(255), full_name varchar(100));
-				");
-				echo 'База данных my-storage успешно создана!';
+                ");
 			}
 		}
 		catch(PDOException $e) {
-			echo "Неудачная попытка подключения к базе данных: " . $e->getMessage();
+			$this->getException($e, $dbname);
 		}
 	}
+
+    public function getTable($table)
+    {
+        $dbname = parent::getDbname();
+        try {
+             return $this->getDatabase()->query("SELECT * FROM $table");
+        }
+        catch(PDOException $e) {
+            $this->getException($e, $dbname);
+        }
+    }
 }

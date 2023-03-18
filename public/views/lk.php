@@ -1,10 +1,5 @@
 <?php
 session_start();
-//var_dump($_SESSION['user']);
-var_dump($_SESSION['user_folders']);
-var_dump($_SESSION['folder_path']);
-//unset($_SESSION['user_folders']);
-//require __DIR__ . '/../includes/all-folders.php';
 ?>
 
 <!doctype html>
@@ -29,11 +24,12 @@ var_dump($_SESSION['folder_path']);
             </div>
         </aside>
         <main class="center-container flex">
+            <h1 class="center-title">Мой диск</h1>
             <div class="center-header flex">
-                <h1 class="center-title reset">Мой диск</h1>
+
 
                 <form action="../includes/save-file.php" enctype="multipart/form-data" method="post">
-                    <div class="mb-3">
+                    <div class="flex">
 <!--                        <label for="formFileMultiple" class="form-label">Загрузить файл</label>-->
                         <input class="form-control" type="file" name="fileToUpload" id="formFileMultiple" multiple>
                         <input type="submit" value="Отправить" name="downloaded_file">
@@ -89,9 +85,9 @@ var_dump($_SESSION['folder_path']);
             </div>
         </main>
         <aside class="right-container flex">
-            <h2>Мой профиль</h2>
-            <h4>Привет, <?=$_SESSION['user'][0]['full_name'];?>!</h4>
-            <a href="../includes/logout.php">Выйти</a>
+            <h2 class="right-container__title">Мой профиль</h2>
+            <h4 class="right-container__title">Привет, <?=$_SESSION['user'][0]['full_name'];?>!</h4>
+            <a href="../includes/logout.php" class="right-container__title">Выйти</a>
         </aside>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

@@ -6,6 +6,7 @@
     --dark-orange: #E1670E;
     --light-grey: #CACACA;
     --body: rgba(148, 112, 148, 0.85);
+    /*--body: rgb(51, 44, 44);*/
     /*--body: #E5E5E5;*/
 }
 * {box-sizing: border-box}
@@ -62,6 +63,7 @@ a {
 }
 
 .center-title {
+    margin: 10px;
     font-size: 40px;
     line-height: 48px;
 }
@@ -140,4 +142,8 @@ a {
 
 .password_not_match {
     color: darkred;
+}
+
+.right-container__title {
+    margin: 10px;
 }

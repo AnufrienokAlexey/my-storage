@@ -1,16 +1,7 @@
 <?php
-
-session_start();
-
-require __DIR__ . '/../vendor/autoload.php';
-
-new Connect();
-
-if (!empty($_SESSION['user'])) {
-	header('Location: views/lk.php');
-}
-
+require 'includes/index.php';
 ?>
+
 <!doctype html>
 <html lang="ru">
 <head>
@@ -42,10 +33,10 @@ if (!empty($_SESSION['user'])) {
 		</div>
 	</form>
 	<?php
-	if (isset($_SESSION['success_register'])) {
-		echo '<p class="sign-in_title">' . $_SESSION['success_register'] . '</p>';
-		unset($_SESSION['success_register']);
-	}
+        if (isset($_SESSION['success_register'])) {
+            echo '<p class="sign-in_title">' . $_SESSION['success_register'] . '</p>';
+            unset($_SESSION['success_register']);
+        }
 	?>
 </main>
 </body>

@@ -2,7 +2,6 @@
 session_start();
 
 require __DIR__ . '/../../vendor/autoload.php';
-var_dump($_POST);
 
 $folder = new Folder();
 $login = $_SESSION['user'][0]['login'];
@@ -16,4 +15,5 @@ $allFolders = $folder->deleteFolder($login, $_POST['id']);
 //
 //$_SESSION['user_folders'] = $arr;
 //var_dump($arr);
+
 header('Location: all-folders.php');
