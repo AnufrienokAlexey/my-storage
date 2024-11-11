@@ -8,12 +8,16 @@ class Connect extends Db {
     {
         $dbname = parent::getDbname();
 		try {
-            $databases = $this->getAllDatabases()->query('show databases')->fetchAll(PDO::FETCH_COLUMN);
+            $databases = $this->getAllDatabases()->query('SHOW DATABASES')->fetchAll(PDO::FETCH_COLUMN);
 			if (!in_array($dbname, $databases)) {
                 $this->getAllDatabases()->exec("
 					CREATE DATABASE $dbname;
 					use $dbname;
-					CREATE TABLE `users` (id integer auto_increment primary key, login varchar(30), email varchar(100), password varchar(255), full_name varchar(100));
+					CREATE TABLE `users` (
+					id integer auto_increment primary key, 
+					login varchar(30), email varchar(100), 
+					password varchar(255), 
+					full_name varchar(100));
                 ");
 			}
 		}
